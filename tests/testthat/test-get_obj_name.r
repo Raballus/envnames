@@ -396,7 +396,13 @@ test_that("T93) the name of NULL is NULL, and the name of NA is \"NA\", regardle
   expect_equal( get_obj_name(NA, eval=FALSE), "NA" )
   expect_equal( get_obj_name(NA, eval=TRUE), "NA" )
 })
-# Extreme cases -----------------------------------------------------------
+
+test_that("objects deparsing to more than 60 characters do not cause an error", {
+  # related to #12
+  expect_no_error(
+    get_obj_name(data.frame(x = 1:8, y = c("a", "b", "c", "d", "e", "f", "g", "h")), n = 1)
+  )
+})
 
 
 # 3.- Cleanup -------------------------------------------------------------
